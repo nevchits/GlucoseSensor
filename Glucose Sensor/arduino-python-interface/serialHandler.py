@@ -3,7 +3,7 @@ import serial
 from thingspeaker import dataUpdater
 
 serialOutputString = ""
-temp,pid = 0,0
+Glucose = 0
 
 nanoSerial = serial.Serial("/dev/ttyUSB0",9600)
 myupdater = dataUpdater
@@ -36,27 +36,19 @@ while (1):
     
     # print  (serialOutputString)
 
-    if (serialOutputString.__contains__("Input")):
+    if (serialOutputString.__contains__("Glucose")):
         inputVal = serialOutputString.split("-->")
-        temp = inputVal[len(inputVal)-1]
-        temp = temp.strip()
-        temp = temp.strip('\r')
-        temp = temp.strip('\r')
-        temp = temp.strip('\n')
-        print("Temp = " + temp)
+        Glucose = inputVal[len(inputVal)-1]
+        Glucose = Glucose.strip()
+        Glucose = Glucose.strip('\r')
+        Glucose = Glucose.strip('\r')
+        Glucose = Glucose.strip('\n')
+        print("Glucose = " + Glucose)
+        sendToThingspeak(Glucose)
 
-
-    # getting the PID output using this format: "Calculated output --> 148.50\n"
-    if (serialOutputString.__contains__("Calculated")):
-        inputVal = serialOutputString.split("-->")
-        pid = inputVal[len(inputVal)-1]
-        pid = pid.strip()
-        pid = pid.strip('\r')
-        pid = pid.strip('\n')
-        print("PID output = " + pid)
 
     # let's breathe, although we'll need to breathe after every 2 lines:
     # time.sleep(5)
-    sendToThingspeak(temp,pid)
+    
 
 nanoSerial.close()

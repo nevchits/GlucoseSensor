@@ -2,7 +2,7 @@ import sys
 from time import sleep
 from urllib.request import urlopen
 
-API_KEY = 'MY_API_KEY'
+API_KEY = '7UNDHSR2H0I27ZV5'
 
 class dataUpdater():
     #temperature = 0
@@ -12,7 +12,7 @@ class dataUpdater():
         bloodGlucose = glucose
     
     def sendData(glucose):
-        baseURL = 'https://api.thingspeak.com/update?api_key={}}&field1={}'
+        baseURL = 'https://api.thingspeak.com/update?api_key={}&field1={}'
         
         newRequest = baseURL.format(API_KEY,glucose)
         print (newRequest)
