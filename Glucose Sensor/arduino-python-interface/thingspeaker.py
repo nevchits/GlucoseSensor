@@ -2,7 +2,7 @@ import sys
 from time import sleep
 from urllib.request import urlopen
 
-API_KEY = '7UNDHSR2H0I27ZV5'
+API_KEY = 'API_KEY'
 
 class dataUpdater():
     #temperature = 0
